@@ -4,7 +4,7 @@ package_name = 'neato_driver'
 
 setup(
     name=package_name,
-    version='0.1.0',
+    version='0.3.0',
     packages=[package_name],
     data_files=[
         ('share/ament_index/resource_index/packages',
@@ -13,11 +13,10 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='jnugen',
+    maintainer='James Nugen',
     maintainer_email='jnugen@gmail.com',
-    description='neato robot driver',
-    license='TODO: License declaration',
-    tests_require=['pytest'],
+    description='This is a generic driver for the Neato Botvac Robotic Vacuums.',
+    license='BSD',
     entry_points={
         'console_scripts': [
         ],

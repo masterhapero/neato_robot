@@ -1,9 +1,9 @@
 <package format="3">
   <name>neato_node</name>
-  <version>0.1.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="jnugen@gmail.com">jnugen</maintainer>
-  <license>TODO: License declaration</license>
+  <version>0.3.0</version>
+  <description>A node wrapper for the neato_driver package</description>
+  <maintainer email="jnugen@gmail.com">James Nugen</maintainer>
+  <license>BSD</license>
 
   <build_depend>rosidl_default_generators</build_depend>
   <exec_depend>rosidl_default_runtime</exec_depend>

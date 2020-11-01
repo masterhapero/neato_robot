@@ -1,16 +1,9 @@
-<?xml version="1.0"?>
-<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>neato_driver</name>
-  <version>0.1.0</version>
-  <description>neato robot driver</description>
-  <maintainer email="jnugen@gmail.com">jnugen</maintainer>
-  <license>TODO: License declaration</license>
-
-  <test_depend>ament_copyright</test_depend>
-  <test_depend>ament_flake8</test_depend>
-  <test_depend>ament_pep257</test_depend>
-  <test_depend>python3-pytest</test_depend>
+  <version>0.3.0</version>
+  <description>This is a generic driver for the Neato Botvac Robotic Vacuums.</description>
+  <maintainer email="jnugen@gmail.com">James Nugen</maintainer>
+  <license>BSD</license>
 
   <export>
     <build_type>ament_python</build_type>

@@ -5,7 +5,7 @@
     Metapackage for drivers for the Neato Botvac robots.
   </description>
   <author>Michael Ferguson</author>
-  <maintainer email="ferguson@cs.albany.edu">Michael Ferguson</maintainer>
+  <maintainer email="jnugen@gmail.com">James Nugen</maintainer>
   <license>BSD</license>
   <url>http://ros.org/wiki/neato_robot</url>
 

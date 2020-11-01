@@ -6,7 +6,7 @@ package_name = 'neato_node'
 
 setup(
     name=package_name,
-    version='0.1.0',
+    version='0.3.0',
     packages=[package_name],
     data_files=[
         ('share/ament_index/resource_index/packages',
@@ -16,10 +16,10 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='jnugen',
+    maintainer='James Nugen',
     maintainer_email='jnugen@gmail.com',
-    description='TODO: Package description',
-    license='TODO: License declaration',
+    description='A node wrapper for the neato_driver package',
+    license='BSD',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
