@@ -38,7 +38,7 @@ class NeatoNode(Node):
         try:
             self.robot = Botvac(self.port)
         except:
-            self.logger.error("Could not connect to Botvac")
+            self.get_logger().error("Could not connect to Botvac")
             raise
 
         self.create_subscription(Twist, 'cmd_vel', self.cmdVelCb, 10)
@@ -51,9 +51,9 @@ class NeatoNode(Node):
         self.cmd_vel = [0, 0]
         self.old_vel = self.cmd_vel
 
-        self.spin_init()
+        self._spin_init()
 
-    def spin_init(self):
+    def _spin_init(self):
         self._encoders = [0, 0]
 
         self._x = 0.0                  # position in xy plane
@@ -182,11 +182,9 @@ class NeatoNode(Node):
                 sensor.name = self._sensor_enum[idx]
                 self.sensorPub.publish(sensor)
 
-        # shut down
-        #self.robot.setBacklight(0)
-        #self.robot.setLED("Off")
-        #self.robot.setLDS("off")
-        #self.robot.setTestMode("off")
+    def shutdown(self):
+        self.destroy_timer(self._timer)
+        self.robot.shutdown()
 
     def sign(self,a):
         if a >= 0:
@@ -208,17 +206,22 @@ class NeatoNode(Node):
 def main(args=None):
     rclpy.init(args=args)
 
+    exit_code = 0
+
     try:
         node = NeatoNode()
     except:
-        sys.exit(1)
+        exit_code = 1
+    else:
+        try:
+            rclpy.spin(node)
+        except:
+            node.shutdown()
+            node.destroy_node()
 
-
-    rclpy.spin(node)
-
-    # Destroy the node explicitly
-    node.destroy_node()
     rclpy.shutdown()
+
+    sys.exit(exit_code)
 
 if __name__ == "__main__":    
     main()

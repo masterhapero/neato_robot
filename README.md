@@ -1,8 +1,15 @@
+# WIP
+
 ## Neato Drivers
 
 This repository contains the Neato drivers for ROS2 Foxy.
 
-## Usage
+## Install
+
+Prerequisites:
+
+    sudo apt install python3-serial
+
 You can check this out into your workspace as follows:
 
     cd <ws>/src
@@ -11,10 +18,10 @@ You can check this out into your workspace as follows:
     colcon build
     source <ws>/install/setup.bash
 
-## Launching
+## Launch
 
     ros2 launch neato_node neato_node_launch.py
 
-## Trying Teleop
+## Try Teleop
 
     ros2 run teleop_twist_keyboard teleop_twist_keyboard

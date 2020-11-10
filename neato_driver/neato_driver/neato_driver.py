@@ -21,7 +21,7 @@ class Botvac():
         try:
             self.port = serial.Serial(port, 115200, timeout = 0.1)
         except:
-            #self.logger.errror("Could not access serial port: %s" % port)
+            self.logger.error("Could not access serial port: %s" % port)
             raise
 
         #if not self.port.isOpen():
@@ -71,7 +71,7 @@ class Botvac():
         self.logger.info("Init Done")
 
 
-    def exit(self):
+    def shutdown(self):
         self.setLDS("off")
         self.setLed("buttonoff")
 
@@ -364,7 +364,7 @@ class Botvac():
         else:
             self.logger.error("Time Out") # no data so must have timedout
 
-        #self.logger.info("Got Response: %s, Last: %d" % (line,last))
+        #self.logger.debug("Got Response: %s, Last: %d" % (line,last))
         return (line,last)
 
     def flush(self):
