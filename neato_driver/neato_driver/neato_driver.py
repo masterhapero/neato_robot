@@ -19,7 +19,7 @@ class Botvac():
         self.logger = rclpy.logging.get_logger("neato_driver")
 
         try:
-            self.port = serial.Serial(port, 115200, timeout = 0.1)
+            self.port = serial.Serial(port, 115200, timeout = 0)
         except:
             self.logger.error("Could not access serial port: %s" % port)
             raise
@@ -289,9 +289,33 @@ class Botvac():
         return True
 
     # thread to read data from the serial port
+    # when an end of response (^Z) is read, adds the complete list of response lines to self.responseData and resets internal buffer
+    def read(self):
+        self.reading = True
+        datalst = list()
+        datain = bytearray()
+
+        while (self.reading and rclpy.ok()):
+            try:
+                valarr = self.port.read(size=8196)
+            except Exception as ex:
+                self.logger.error("Exception Reading Neato Serial: " + str(ex))
+                valarr = b''
+
+            if len(valarr) > 0:
+                datain += valarr
+                if datain[len(datain)-1] == 26:
+                    # self.logger.info("Read "+str(len(valarr))+" "+datain)
+                    datastr = datain[0:len(datain)-2].decode()
+                    datalst = datastr.split('\n')
+                    with self.readLock:
+                        self.responseData.append(datalst)
+                    datain = bytearray()
+                        
+    # thread to read data from the serial port
     # buffers each line in a list (self.comsData)
     # when an end of response (^Z) is read, adds the complete list of response lines to self.responseData and resets the comsData list for the next command response.
-    def read(self):
+    def read_old(self):
         self.reading = True
         line = bytearray()
 
