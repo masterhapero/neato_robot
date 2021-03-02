@@ -10,6 +10,7 @@ import rclpy
 import serial
 import time
 import threading
+import select
 
 BASE_WIDTH = 248    # millimeters
 MAX_SPEED = 300     # millimeters/second
@@ -296,11 +297,16 @@ class Botvac():
         datain = bytearray()
 
         while (self.reading and rclpy.ok()):
-            try:
-                valarr = self.port.read(size=8196)
-            except Exception as ex:
-                self.logger.error("Exception Reading Neato Serial: " + str(ex))
+            neatofid = self.port.fileno()
+            readable, writable, exceptional = select.select([neatofid],[],[],1.0)
+            if not(readable):
                 valarr = b''
+            else:
+                try:
+                    valarr = self.port.read(size=8196)
+                except Exception as ex:
+                    self.logger.error("Exception Reading Neato Serial: " + str(ex))
+                    valarr = b''
 
             if len(valarr) > 0:
                 datain += valarr
